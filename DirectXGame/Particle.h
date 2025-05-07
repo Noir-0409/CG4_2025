@@ -3,29 +3,26 @@
 
 using namespace KamataEngine;
 
-//パーティクル
+// パーティクル
 class Particle {
 
 public:
+	void Initialize(Model* model, Vector3 position);
 
-void Initialize(Model* model, Vector3 position);
+	void Update();
 
-void Update();
-
-void Draw(Camera& camera);
+	void Draw(Camera& camera);
 
 private:
-
-//ワールド変換データ
+	// ワールド変換データ
 	WorldTransform worldTransform_;
 
-//モデル
+	// モデル
 	Model* model_ = nullptr;
 
-//色変更オブジェクト
+	// 色変更オブジェクト
 	ObjectColor objectColor_;
 
-//色の数値
+	// 色の数値
 	Vector4 color_;
-
 };
