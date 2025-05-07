@@ -18,10 +18,7 @@ void Particle::Initialize(Model* model) {
 
 void Particle::Update() {
 
-//行列を定数バッファに転送
-	//worldTransform_.TransferMatrix();
-
-	//移動
+//移動
 worldTransform_.translation_ += {0.0f, 0.1f, 0.0f};
 
 //色変更オブジェクトに色の数値を設定
