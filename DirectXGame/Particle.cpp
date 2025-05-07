@@ -4,7 +4,7 @@ void Particle::Initialize(Model* model) {
 
 	assert(model);
 
-	model_ = model; 
+	model_ = model;
 
 	worldTransform_.Initialize();
 
@@ -12,13 +12,13 @@ void Particle::Initialize(Model* model) {
 
 void Particle::Update() {
 
-//行列を定数バッファに転送
+	// 行列を定数バッファに転送
 	worldTransform_.TransferMatrix();
 
 }
 
-void Particle::Draw(Camera& camera) {
-
+void Particle::Draw(Camera& camera) { 
+	
 	model_->Draw(worldTransform_, camera);
 
 }

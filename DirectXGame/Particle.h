@@ -3,23 +3,21 @@
 
 using namespace KamataEngine;
 
-//パーティクル
+// パーティクル
 class Particle {
 
 public:
+	void Initialize(Model* model);
 
-void Initialize(Model* model);
+	void Update();
 
-void Update();
-
-void Draw(Camera& camera);
+	void Draw(Camera& camera);
 
 private:
-
-//ワールド変換データ
+	// ワールド変換データ
 	WorldTransform worldTransform_;
 
-//モデル
+	// モデル
 	Model* model_ = nullptr;
 
 };
