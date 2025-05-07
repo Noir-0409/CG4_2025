@@ -6,31 +6,28 @@ void Particle::Initialize(Model* model) {
 
 	assert(model);
 
-	model_ = model; 
+	model_ = model;
 
 	worldTransform_.Initialize();
 
-	//色の設定
+	// 色の設定
 	objectColor_.Initialize();
 	color_ = {1, 1, 0, 1};
-
 }
 
 void Particle::Update() {
 
-//移動
-worldTransform_.translation_ += {0.0f, 0.1f, 0.0f};
+	// 移動
+	worldTransform_.translation_ += {0.0f, 0.1f, 0.0f};
 
-//色変更オブジェクトに色の数値を設定
+	// 色変更オブジェクトに色の数値を設定
 	objectColor_.SetColor(color_);
 
 	worldTransform_.UpdateMatrix();
-
 }
 
-void Particle::Draw(Camera& camera) {
-
+void Particle::Draw(Camera& camera) { 
+	
 	model_->Draw(worldTransform_, camera, &objectColor_);
-
 
 }
