@@ -20,6 +20,9 @@ public:
 	// 描画
 	void Draw();
 
+	//発生源
+	void ParticleBorn(Vector3 position);
+
 private:
 	// モデルデータ
 	Model* modelParticle_ = nullptr;
