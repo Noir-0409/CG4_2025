@@ -22,7 +22,7 @@ void Particle::Initialize(Model* model, Vector3 position, Vector3 velocity) {
 void Particle::Update() {
 
 	// 移動
-	worldTransform_.translation_ += {0.0f, 0.1f, 0.0f};
+	worldTransform_.translation_ += velocity_;
 
 	// 色変更オブジェクトに色の数値を設定
 	objectColor_.SetColor(color_);
