@@ -2,7 +2,7 @@
 
 using namespace MathUtility;
 
-void Particle::Initialize(Model* model, Vector3 position) {
+void Particle::Initialize(Model* model, Vector3 position, Vector3 velocity) {
 
 	assert(model);
 
@@ -15,6 +15,8 @@ void Particle::Initialize(Model* model, Vector3 position) {
 	color_ = {1, 1, 0, 1};
 
 	worldTransform_.translation_ = position;
+
+	velocity_ = velocity;
 }
 
 void Particle::Update() {
