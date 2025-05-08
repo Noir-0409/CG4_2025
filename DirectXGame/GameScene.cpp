@@ -1,6 +1,8 @@
 #include "GameScene.h"
 #include <random>
 
+using namespace MathUtility;
+
 std::random_device seedGenerator;
 std::mt19937 randomEngine(seedGenerator());
 std::uniform_real_distribution<float> distribution(-1.0f, 1.0f);
@@ -28,8 +30,12 @@ void GameScene::Initialize() {
 		// 位置
 		Vector3 position = {0.0f, 0.0f, 0.0f};
 
-		//移動量
+		// 移動量
 		Vector3 velocity = {distribution(randomEngine), distribution(randomEngine), 0};
+
+		Normalize(velocity);
+		velocity *= distribution(randomEngine);
+		velocity *= 0.1f;
 
 		// 初期化
 		particle->Initialize(modelParticle_, position, velocity);
@@ -40,8 +46,6 @@ void GameScene::Initialize() {
 }
 
 void GameScene::Update() {
-
-	// particle_->Update();
 
 	for (Particle* particle : particles_) {
 
@@ -56,8 +60,6 @@ void GameScene::Draw() {
 
 	// 3Dモデル描画前処理
 	Model::PreDraw(dxCommon->GetCommandList());
-
-	// particle_->Draw(camera_);
 
 	for (Particle* particle : particles_) {
 

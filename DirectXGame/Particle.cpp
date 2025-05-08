@@ -15,6 +15,7 @@ void Particle::Initialize(Model* model, Vector3 position, Vector3 velocity) {
 	color_ = {1, 1, 0, 1};
 
 	worldTransform_.translation_ = position;
+	worldTransform_.scale_ = {0.2f, 0.2f, 0.2f};
 
 	velocity_ = velocity;
 }
