@@ -20,7 +20,7 @@ public:
 	// 描画
 	void Draw();
 
-	//発生源
+	// 発生源
 	void ParticleBorn(Vector3 position);
 
 private:

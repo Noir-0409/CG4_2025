@@ -47,7 +47,7 @@ void Particle::Update() {
 		isFinished_ = true;
 	}
 
-		// フェード処理
+	// フェード処理
 	color_.w = std::clamp(1.0f - counter_ / kDuration, 0.0f, 1.0f);
 
 	worldTransform_.UpdateMatrix();

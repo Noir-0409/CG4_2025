@@ -21,9 +21,8 @@ void GameScene::Initialize() {
 	// カメラの初期化
 	camera_.Initialize();
 
-	//乱数の初期化
+	// 乱数の初期化
 	srand((unsigned)time(NULL));
-
 }
 
 void GameScene::Update() {
@@ -33,14 +32,13 @@ void GameScene::Update() {
 		particle->Update();
 	}
 
-	//確率で発生
+	// 確率で発生
 	if (rand() % 20 == 0) {
-	
+
 		// 発生位置は乱数
 		Vector3 position = {distribution(randomEngine) * 30.0f, distribution(randomEngine) * 20.0f, 0};
 
 		ParticleBorn(position);
-	
 	}
 
 	// 終了フラグの立ったパーティクルを削除

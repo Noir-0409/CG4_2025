@@ -13,7 +13,7 @@ public:
 
 	void Draw(Camera& camera);
 
-	//getter
+	// getter
 	bool IsFinished() const { return isFinished_; }
 
 private:
@@ -32,12 +32,12 @@ private:
 	// 移動量
 	Vector3 velocity_;
 
-	//終了フラグ
+	// 終了フラグ
 	bool isFinished_ = false;
 
-	//時間経過カウント
+	// 時間経過カウント
 	float counter_ = 0.0f;
 
-	//持続時間
+	// 持続時間
 	const float kDuration = 1.0f;
 };
