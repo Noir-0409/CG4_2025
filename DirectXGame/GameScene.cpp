@@ -27,20 +27,6 @@ void GameScene::Initialize() {
 
 void GameScene::Update() {
 
-	for (Particle* particle : particles_) {
-
-		particle->Update();
-	}
-
-	// 確率で発生
-	if (rand() % 20 == 0) {
-
-		// 発生位置は乱数
-		Vector3 position = {distribution(randomEngine) * 30.0f, distribution(randomEngine) * 20.0f, 0};
-
-		ParticleBorn(position);
-	}
-
 	// 終了フラグの立ったパーティクルを削除
 	particles_.remove_if([](Particle* particle) {
 		if (particle->IsFinished()) {
@@ -52,6 +38,20 @@ void GameScene::Update() {
 
 		return false;
 	});
+
+	// 確率で発生
+	if (rand() % 20 == 0) {
+
+		// 発生位置は乱数
+		Vector3 position = {distribution(randomEngine) * 30.0f, distribution(randomEngine) * 20.0f, 0};
+
+		ParticleBorn(position);
+	}
+
+	for (Particle* particle : particles_) {
+
+		particle->Update();
+	}
 }
 
 void GameScene::Draw() {
