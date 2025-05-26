@@ -6,7 +6,10 @@ GameScene::GameScene() {}
 GameScene::~GameScene() {
 
 	delete modelEffect_;
-	delete effect_;
+	for (Effect* effects : effects_) {
+
+		delete effects;
+	}
 }
 
 void GameScene::Initialize() {
@@ -15,11 +18,23 @@ void GameScene::Initialize() {
 
 	camera_.Initialize();
 
-	effect_ = new Effect();
-	effect_->Initialize(modelEffect_);
+	for (int i = 0; i < 10; i++) {
+	
+	Effect* effects = new Effect();
+	effects->Initialize(modelEffect_);
+	effects_.push_back(effects);
+
+	}
+
 }
 
-void GameScene::Update() { effect_->Update(); }
+void GameScene::Update() {
+	for (Effect* effects : effects_) {
+
+		effects->Update();
+
+	}
+}
 
 void GameScene::Draw() {
 
@@ -27,7 +42,10 @@ void GameScene::Draw() {
 
 	Model::PreDraw(dxCommon->GetCommandList());
 
-	effect_->Draw(camera_);
+	for (Effect* effects : effects_) {
+
+		effects->Draw(camera_);
+	}
 
 	Model::PostDraw();
 }
