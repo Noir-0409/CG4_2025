@@ -3,7 +3,7 @@
 namespace {
 std::random_device rd;
 std::mt19937 mt(rd());
-std::uniform_real_distribution<float> yScaleDist(0.3f, 3.0f);
+std::uniform_real_distribution<float> yScaleDist(20.0f, 25.0f);
 std::uniform_real_distribution<float> zRotDist(-3.14159f, 3.14159f);
 }
 

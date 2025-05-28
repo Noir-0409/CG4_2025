@@ -16,8 +16,8 @@ void Effect::Initialize(Model* model, Vector3 position) {
 	float zRotation = RandomUtility::GetZRotation(); // ← 変更
 
 	worldTransform_.translation_ = position;
-	worldTransform_.scale_ = {1.0f, yScale, 0.1f};
-	worldTransform_.rotation_ = {0.0f, 0.0f, zRotation};
+	worldTransform_.scale_ = {7.0f, yScale, 1.0f};
+	worldTransform_.rotation_ = {0.3f, 0.0f, zRotation};
 }
 
 void Effect::Update() { 

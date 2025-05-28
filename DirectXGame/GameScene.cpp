@@ -15,7 +15,8 @@ GameScene::~GameScene() {
 
 void GameScene::Initialize() {
 
-	modelEffect_ = Model::CreateSphere(2, 2);
+	//modelEffect_ = Model::CreateSphere(2, 2);
+	modelEffect_ = Model::CreateFromOBJ("effect", true);
 
 	camera_.Initialize();
 
@@ -64,7 +65,7 @@ void GameScene::Draw() {
 
 void GameScene::EffectBorn(Vector3 position) {
 
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 40; i++) {
 
 		Effect* effects = new Effect();
 		effects->Initialize(modelEffect_,position);
