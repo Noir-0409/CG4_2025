@@ -23,6 +23,10 @@ private:
 	// モデル
 	Model* model_ = nullptr;
 	
+	ObjectColor objectColor_;
+
+	Vector4 color_;
+
 	bool isFinished_ = false;
 
 	float counter_ = 0.0f;

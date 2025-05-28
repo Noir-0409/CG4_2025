@@ -1,5 +1,6 @@
 #include "Effect.h"
 #include <random>
+#include <algorithm>
 
 std::random_device seedGenerator;
 std::mt19937 randomEngine(seedGenerator());
@@ -11,6 +12,10 @@ void Effect::Initialize(Model* model) {
 	assert(model);
 	model_ = model;
 	worldTransform_.Initialize();
+
+	objectColor_.Initialize();
+	color_ = {1, 1, 1, 1};
+
 	float yScale = yScaleDist(randomEngine);
 	float zRotation = zRotDist(randomEngine);
 
@@ -26,6 +31,10 @@ void Effect::Update() {
 	
 	}
 
+	objectColor_.SetColor(color_);
+
+	color_.w = std::clamp(1.0f - counter_ / kDuration, 0.0f, 1.0f);
+
 	counter_ += 1.0f / 60.0f;
 
 	if (counter_ >= kDuration) {
@@ -40,4 +49,4 @@ void Effect::Update() {
 
 }
 
-void Effect::Draw(Camera& camera) { model_->Draw(worldTransform_, camera); }
+void Effect::Draw(Camera& camera) { model_->Draw(worldTransform_, camera,&objectColor_); }
