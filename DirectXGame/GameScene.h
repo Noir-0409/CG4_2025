@@ -21,6 +21,8 @@ public:
 	// 描画
 	void Draw();
 
+	void EffectBorn(Vector3 position);
+
 private:
 	// モデル
 	Model* modelEffect_ = nullptr;
@@ -29,8 +31,8 @@ private:
 	Camera camera_;
 
 	// エフェクト
-	//Effect* effect_ = nullptr;
-
 	std::list<Effect*> effects_;
+
+
 
 };

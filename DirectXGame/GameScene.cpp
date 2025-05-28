@@ -1,5 +1,6 @@
 #include "GameScene.h"
 #include <random>
+#include "RandomUtility.h"
 
 GameScene::GameScene() {}
 
@@ -18,13 +19,9 @@ void GameScene::Initialize() {
 
 	camera_.Initialize();
 
-	for (int i = 0; i < 10; i++) {
-	
-	Effect* effects = new Effect();
-	effects->Initialize(modelEffect_);
-	effects_.push_back(effects);
+	Vector3 position = RandomUtility::GetRandomPosition(30.0f, 20.0f);
 
-	}
+	EffectBorn(position);
 
 }
 
@@ -63,4 +60,15 @@ void GameScene::Draw() {
 	}
 
 	Model::PostDraw();
+}
+
+void GameScene::EffectBorn(Vector3 position) {
+
+		for (int i = 0; i < 10; i++) {
+
+		Effect* effects = new Effect();
+		effects->Initialize(modelEffect_,position);
+		effects_.push_back(effects);
+	}
+
 }

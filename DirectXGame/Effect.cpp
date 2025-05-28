@@ -1,13 +1,9 @@
 #include "Effect.h"
 #include <random>
 #include <algorithm>
+#include "RandomUtility.h"
 
-std::random_device seedGenerator;
-std::mt19937 randomEngine(seedGenerator());
-std::uniform_real_distribution<float> yScaleDist(0.3f, 3.0f);
-std::uniform_real_distribution<float> zRotDist(-3.14159f, 3.14159f);
-
-void Effect::Initialize(Model* model) {
+void Effect::Initialize(Model* model, Vector3 position) {
 
 	assert(model);
 	model_ = model;
@@ -16,9 +12,10 @@ void Effect::Initialize(Model* model) {
 	objectColor_.Initialize();
 	color_ = {1, 1, 1, 1};
 
-	float yScale = yScaleDist(randomEngine);
-	float zRotation = zRotDist(randomEngine);
+	 float yScale = RandomUtility::GetYScale();       // ← 変更
+	float zRotation = RandomUtility::GetZRotation(); // ← 変更
 
+	worldTransform_.translation_ = position;
 	worldTransform_.scale_ = {1.0f, yScale, 0.1f};
 	worldTransform_.rotation_ = {0.0f, 0.0f, zRotation};
 }

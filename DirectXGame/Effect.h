@@ -8,7 +8,7 @@ using namespace KamataEngine;
 class Effect {
 
 public:
-	void Initialize(Model* model);
+	void Initialize(Model* model, Vector3 position);
 
 	void Update();
 
