@@ -15,14 +15,11 @@ GameScene::~GameScene() {
 
 void GameScene::Initialize() {
 
-	//modelEffect_ = Model::CreateSphere(2, 2);
 	modelEffect_ = Model::CreateFromOBJ("effect", true);
 
 	camera_.Initialize();
 
-	Vector3 position = RandomUtility::GetRandomPosition(30.0f, 20.0f);
-
-	EffectBorn(position);
+	srand((unsigned)time(NULL));
 
 }
 
@@ -46,6 +43,13 @@ void GameScene::Update() {
 		return false;
 
 	});
+
+	if (rand() % 20 == 0) {
+
+		Vector3 position = RandomUtility::GetRandomPosition(30.0f, 20.0f);
+
+		EffectBorn(position);
+	}
 
 }
 
