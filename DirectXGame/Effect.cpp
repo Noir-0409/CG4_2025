@@ -3,7 +3,7 @@
 
 std::random_device seedGenerator;
 std::mt19937 randomEngine(seedGenerator());
-std::uniform_real_distribution<float> yScaleDist(0.5f, 5.0f);
+std::uniform_real_distribution<float> yScaleDist(0.3f, 3.0f);
 std::uniform_real_distribution<float> zRotDist(-3.14159f, 3.14159f);
 
 void Effect::Initialize(Model* model) {
@@ -19,6 +19,22 @@ void Effect::Initialize(Model* model) {
 }
 
 void Effect::Update() { 
+
+	if (isFinished_) {
+	
+		return;
+	
+	}
+
+	counter_ += 1.0f / 60.0f;
+
+	if (counter_ >= kDuration) {
+	
+	counter_ = kDuration;
+
+	isFinished_ = true;
+	
+	}
 
 	worldTransform_.UpdateMatrix();
 
