@@ -10,5 +10,7 @@ public:
 	static Vector3 GetRandomPosition(float xRange, float yRange);
 	static float GetYScale();
 	static float GetZRotation();
+	static float GetXScale();
+	static float GetZScale();  
 
 };

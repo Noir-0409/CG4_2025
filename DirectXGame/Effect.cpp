@@ -11,12 +11,13 @@ void Effect::Initialize(Model* model, Vector3 position) {
 
 	objectColor_.Initialize();
 	color_ = {1, 1, 1, 1};
-
-	 float yScale = RandomUtility::GetYScale();       // ← 変更
-	float zRotation = RandomUtility::GetZRotation(); // ← 変更
+	float xScale = RandomUtility::GetXScale();
+	float yScale = RandomUtility::GetYScale();
+	float zScale = RandomUtility::GetZScale();
+	float zRotation = RandomUtility::GetZRotation();
 
 	worldTransform_.translation_ = position;
-	worldTransform_.scale_ = {7.0f, yScale, 1.0f};
+	worldTransform_.scale_ = {xScale, yScale, zScale};
 	worldTransform_.rotation_ = {0.3f, 0.0f, zRotation};
 }
 
@@ -31,6 +32,8 @@ void Effect::Update() {
 	objectColor_.SetColor(color_);
 
 	color_.w = std::clamp(1.0f - counter_ / kDuration, 0.0f, 1.0f);
+
+	worldTransform_.rotation_.z += 0.05f;
 
 	counter_ += 1.0f / 60.0f;
 
