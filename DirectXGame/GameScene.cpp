@@ -18,4 +18,8 @@ Model2::StaticInitialize();
 
 void GameScene::Update() {}
 
-void GameScene::Draw() {}
+void GameScene::Draw() {
+
+
+
+}
