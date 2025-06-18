@@ -2,6 +2,7 @@
 #include "3d/Model.h"
 #include "KamataEngine.h"
 #include "Particle.h"
+#include "Model2.h"
 
 using namespace KamataEngine;
 
@@ -22,7 +23,7 @@ public:
 
 private:
 	// モデルデータ
-	Model* modelParticle_ = nullptr;
+	Model2* modelParticle_ = nullptr;
 
 	// カメラ
 	Camera camera_;

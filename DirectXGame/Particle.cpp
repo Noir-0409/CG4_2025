@@ -1,6 +1,7 @@
 #include "Particle.h"
+#include "Model2.h"
 
-void Particle::Initialize(Model* model) {
+void Particle::Initialize(Model2* model) {
 
 	assert(model);
 
