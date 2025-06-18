@@ -10,7 +10,7 @@ GameScene::~GameScene() {
 void GameScene::Initialize() {
 
 	// モデルデータ生成
-	modelParticle_ = Model2::CreateSphere(4, 4);
+	modelParticle_ = Model2::CreateSquare();
 
 	// カメラの初期化
 	camera_.Initialize();
