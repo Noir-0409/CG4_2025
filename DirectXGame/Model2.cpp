@@ -131,50 +131,93 @@ Model2* Model2::CreateSphere(uint32_t divisionVertial, uint32_t divisionHorizont
 	return instance;
 }
 
-Model2* Model2::CreateSquare() {
+Model2* Model2::CreateSquare(int num) {
 
-	// メモリ確保
+	//// メモリ確保
+	//Model2* instance = new Model2;
+	//std::vector<Mesh::VertexPosNormalUv> vertices;
+	//std::vector<uint32_t> indices;
+
+	//// 頂点数とインデックス数
+	//const uint32_t kNumVertices = 4;
+	//const uint32_t kNumIndices = 6;
+	//vertices.resize(kNumVertices);
+	//indices.resize(kNumIndices);
+
+	//// 左下
+	//vertices[0].pos = {-0.5f, -0.5f, 0.0f};
+	//vertices[0].uv = {0.0f, 1.0f};
+	//vertices[0].normal = {0.0f, 0.0f, -1.0f};
+
+	//// 左上
+	//vertices[1].pos = {-0.5f, 0.5f, 0.0f};
+	//vertices[1].uv = {0.0f, 0.0f};
+	//vertices[1].normal = {0.0f, 0.0f, -1.0f};
+
+	//// 右下
+	//vertices[2].pos = {0.5f, -0.5f, 0.0f};
+	//vertices[2].uv = {1.0f, 1.0f};
+	//vertices[2].normal = {0.0f, 0.0f, -1.0f};
+
+	//// 右上
+	//vertices[3].pos = {0.5f, 0.5f, 0.0f};
+	//vertices[3].uv = {1.0f, 0.0f};
+	//vertices[3].normal = {0.0f, 0.0f, -1.0f};
+
+	//// インデックス
+	//indices[0] = 0;
+	//indices[1] = 1;
+	//indices[2] = 2;
+
+	//indices[3] = 2;
+	//indices[4] = 1;
+	//indices[5] = 3;
+
+	//instance->InitializeFromVertices(vertices, indices);
+	//return instance;
+
+	 // メモリ確保
 	Model2* instance = new Model2;
 	std::vector<Mesh::VertexPosNormalUv> vertices;
 	std::vector<uint32_t> indices;
 
-	// 頂点数とインデックス数
-	const uint32_t kNumVertices = 4;
-	const uint32_t kNumIndices = 6;
-	vertices.resize(kNumVertices);
-	indices.resize(kNumIndices);
+	// 枚数分の頂点・インデックスを用意
+	vertices.resize(num * 4);
+	indices.resize(num * 6);
 
-	// 左下
-	vertices[0].pos = {-0.5f, -0.5f, 0.0f};
-	vertices[0].uv = {0.0f, 1.0f};
-	vertices[0].normal = {0.0f, 0.0f, -1.0f};
+	for (int i = 0; i < num; ++i) {
+		float offsetX = i * 1.0f; // 間隔1.0fで配置
 
-	// 左上
-	vertices[1].pos = {-0.5f, 0.5f, 0.0f};
-	vertices[1].uv = {0.0f, 0.0f};
-	vertices[1].normal = {0.0f, 0.0f, -1.0f};
+		// 頂点4つ
+		vertices[i * 4 + 0].pos = {-0.5f + offsetX, -0.5f, 0.0f};
+		vertices[i * 4 + 0].uv = {0.0f, 1.0f};
+		vertices[i * 4 + 0].normal = {0.0f, 0.0f, -1.0f};
 
-	// 右下
-	vertices[2].pos = {0.5f, -0.5f, 0.0f};
-	vertices[2].uv = {1.0f, 1.0f};
-	vertices[2].normal = {0.0f, 0.0f, -1.0f};
+		vertices[i * 4 + 1].pos = {-0.5f + offsetX, 0.5f, 0.0f};
+		vertices[i * 4 + 1].uv = {0.0f, 0.0f};
+		vertices[i * 4 + 1].normal = {0.0f, 0.0f, -1.0f};
 
-	// 右上
-	vertices[3].pos = {0.5f, 0.5f, 0.0f};
-	vertices[3].uv = {1.0f, 0.0f};
-	vertices[3].normal = {0.0f, 0.0f, -1.0f};
+		vertices[i * 4 + 2].pos = {0.5f + offsetX, -0.5f, 0.0f};
+		vertices[i * 4 + 2].uv = {1.0f, 1.0f};
+		vertices[i * 4 + 2].normal = {0.0f, 0.0f, -1.0f};
 
-	// インデックス
-	indices[0] = 0;
-	indices[1] = 1;
-	indices[2] = 2;
+		vertices[i * 4 + 3].pos = {0.5f + offsetX, 0.5f, 0.0f};
+		vertices[i * 4 + 3].uv = {1.0f, 0.0f};
+		vertices[i * 4 + 3].normal = {0.0f, 0.0f, -1.0f};
 
-	indices[3] = 2;
-	indices[4] = 1;
-	indices[5] = 3;
+		// インデックス6つ
+		indices[i * 6 + 0] = i * 4 + 0;
+		indices[i * 6 + 1] = i * 4 + 1;
+		indices[i * 6 + 2] = i * 4 + 2;
+
+		indices[i * 6 + 3] = i * 4 + 2;
+		indices[i * 6 + 4] = i * 4 + 1;
+		indices[i * 6 + 5] = i * 4 + 3;
+	}
 
 	instance->InitializeFromVertices(vertices, indices);
 	return instance;
+
 }
 
 void Model2::PreDraw(ID3D12GraphicsCommandList* commandList) { ModelCommon2::GetInstance()->PreDraw(commandList); }
