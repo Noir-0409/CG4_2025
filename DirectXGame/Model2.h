@@ -137,7 +137,7 @@ public: // 静的メンバ関数
 	/// <returns>生成されたモデル</returns>
 	static Model2* CreateSphere(uint32_t divisionVertial = 10, uint32_t divisionHorizontal = 10);
 
-	static Model2* CreateSquare(int num);
+	static Model2* CreateSquare(int num, uint32_t textureHandle);
 
 	/// <summary>
 	/// 描画前処理
@@ -199,6 +199,8 @@ private: // メンバ変数
 	std::unique_ptr<Material> defaultMaterial_ = nullptr;
 	// ライト
 	const LightGroup* lightGroup_ = nullptr;
+
+	uint32_t textureHandle_ = 0;
 
 private: // メンバ関数
 	/// <summary>

@@ -131,50 +131,7 @@ Model2* Model2::CreateSphere(uint32_t divisionVertial, uint32_t divisionHorizont
 	return instance;
 }
 
-Model2* Model2::CreateSquare(int num) {
-
-	//// メモリ確保
-	//Model2* instance = new Model2;
-	//std::vector<Mesh::VertexPosNormalUv> vertices;
-	//std::vector<uint32_t> indices;
-
-	//// 頂点数とインデックス数
-	//const uint32_t kNumVertices = 4;
-	//const uint32_t kNumIndices = 6;
-	//vertices.resize(kNumVertices);
-	//indices.resize(kNumIndices);
-
-	//// 左下
-	//vertices[0].pos = {-0.5f, -0.5f, 0.0f};
-	//vertices[0].uv = {0.0f, 1.0f};
-	//vertices[0].normal = {0.0f, 0.0f, -1.0f};
-
-	//// 左上
-	//vertices[1].pos = {-0.5f, 0.5f, 0.0f};
-	//vertices[1].uv = {0.0f, 0.0f};
-	//vertices[1].normal = {0.0f, 0.0f, -1.0f};
-
-	//// 右下
-	//vertices[2].pos = {0.5f, -0.5f, 0.0f};
-	//vertices[2].uv = {1.0f, 1.0f};
-	//vertices[2].normal = {0.0f, 0.0f, -1.0f};
-
-	//// 右上
-	//vertices[3].pos = {0.5f, 0.5f, 0.0f};
-	//vertices[3].uv = {1.0f, 0.0f};
-	//vertices[3].normal = {0.0f, 0.0f, -1.0f};
-
-	//// インデックス
-	//indices[0] = 0;
-	//indices[1] = 1;
-	//indices[2] = 2;
-
-	//indices[3] = 2;
-	//indices[4] = 1;
-	//indices[5] = 3;
-
-	//instance->InitializeFromVertices(vertices, indices);
-	//return instance;
+Model2* Model2::CreateSquare(int num, uint32_t textureHandle) {
 
 	 // メモリ確保
 	Model2* instance = new Model2;
@@ -214,6 +171,8 @@ Model2* Model2::CreateSquare(int num) {
 		indices[i * 6 + 4] = i * 4 + 1;
 		indices[i * 6 + 5] = i * 4 + 3;
 	}
+
+	 instance->textureHandle_ = textureHandle;
 
 	instance->InitializeFromVertices(vertices, indices);
 	return instance;
@@ -637,16 +596,15 @@ void Model2::LoadTextures() {
 }
 
 void Model2::Draw(const WorldTransform& worldTransform, const Camera& camera, const ObjectColor* objectColor) {
-
 	ModelCommon2* common = ModelCommon2::GetInstance();
 
-	// ライトコマンドを積む
+	// ライトコマンド
 	common->LightCommand(lightGroup_);
 
-	// トランスフォームコマンドを積む
+	// トランスフォームコマンド
 	common->TransformCommand(worldTransform, camera);
 
-	// オブジェクトアルファのコマンドを積む
+	// オブジェクトカラー
 	const ObjectColor* useObjectColor = common->GetObjectColor();
 	if (objectColor) {
 		useObjectColor = objectColor;
@@ -655,32 +613,10 @@ void Model2::Draw(const WorldTransform& worldTransform, const Camera& camera, co
 
 	// 全メッシュを描画
 	for (auto& mesh : meshes_) {
-		mesh->Draw(common->GetCommandList(), (UINT)RoomParameter::kMaterial, (UINT)RoomParameter::kTexture);
+		mesh->Draw(common->GetCommandList(), (UINT)RoomParameter::kMaterial, (UINT)RoomParameter::kTexture, textureHandle_);
 	}
 }
 
-void Model2::Draw(const WorldTransform& worldTransform, const Camera& camera, uint32_t textureHadle, const ObjectColor* objectColor) {
-
-	ModelCommon2* common = ModelCommon2::GetInstance();
-
-	// ライトコマンドを積む
-	common->LightCommand(lightGroup_);
-
-	// トランスフォームコマンドを積む
-	common->TransformCommand(worldTransform, camera);
-
-	// オブジェクトアルファのコマンドを積む
-	const ObjectColor* useObjectColor = common->GetObjectColor();
-	if (objectColor) {
-		useObjectColor = objectColor;
-	}
-	useObjectColor->SetGraphicsCommand(common->GetCommandList(), (UINT)RoomParameter::kObjectColor);
-
-	// 全メッシュを描画
-	for (auto& mesh : meshes_) {
-		mesh->Draw(common->GetCommandList(), (UINT)RoomParameter::kMaterial, (UINT)RoomParameter::kTexture, textureHadle);
-	}
-}
 
 void Model2::SetAlpha(float alpha) {
 

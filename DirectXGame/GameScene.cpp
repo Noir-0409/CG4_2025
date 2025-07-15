@@ -9,8 +9,10 @@ GameScene::~GameScene() {
 
 void GameScene::Initialize() {
 
+uint32_t textureHandle_ = TextureManager::Load("uvChecker.png");
+
 	// モデルデータ生成
-	modelParticle_ = Model2::CreateSquare(5);
+	modelParticle_ = Model2::CreateSquare(5,textureHandle_);
 
 	// カメラの初期化
 	camera_.Initialize();
