@@ -139,6 +139,8 @@ public: // 静的メンバ関数
 
 	static Model2* CreateSquare(int num, uint32_t textureHandle);
 
+	static Model2* CreateRing(uint32_t textureHandle);
+
 	/// <summary>
 	/// 描画前処理
 	/// </summary>

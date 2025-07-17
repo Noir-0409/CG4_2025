@@ -179,6 +179,62 @@ Model2* Model2::CreateSquare(int num, uint32_t textureHandle) {
 
 }
 
+Model2* Model2::CreateRing(uint32_t textureHandle) {
+
+	 Model2* instance = new Model2;
+	std::vector<Mesh::VertexPosNormalUv> vertices;
+	std::vector<uint32_t> indices;
+
+	const uint32_t kRingDivide = 32;
+	const float kOuterRadius = 1.0f;
+	const float kInnerRadius = 0.2f;
+	const float radianPerDivide = 2.0f * std::numbers::pi_v<float> / float(kRingDivide);
+
+	// 頂点数は (kRingDivide + 1) * 2
+	vertices.resize((kRingDivide + 1) * 2);
+	indices.resize(kRingDivide * 6);
+
+	for (uint32_t i = 0; i <= kRingDivide; ++i) {
+		float angle = i * radianPerDivide;
+		float sinVal = std::sin(angle);
+		float cosVal = std::cos(angle);
+		float u = float(i) / float(kRingDivide);
+
+		// 外周頂点
+		vertices[i * 2].pos = {-sinVal * kOuterRadius, cosVal * kOuterRadius, 0.0f};
+		vertices[i * 2].uv = {u, 0.0f};
+		vertices[i * 2].normal = {0.0f, 0.0f, 1.0f};
+
+		// 内周頂点
+		vertices[i * 2 + 1].pos = {-sinVal * kInnerRadius, cosVal * kInnerRadius, 0.0f};
+		vertices[i * 2 + 1].uv = {u, 1.0f};
+		vertices[i * 2 + 1].normal = {0.0f, 0.0f, 1.0f};
+	}
+
+	for (uint32_t i = 0; i < kRingDivide; ++i) {
+		uint32_t outerCurr = i * 2;
+		uint32_t innerCurr = outerCurr + 1;
+		uint32_t outerNext = (i + 1) * 2;
+		uint32_t innerNext = outerNext + 1;
+
+		// 三角形1
+		indices[i * 6 + 0] = outerCurr;
+		indices[i * 6 + 1] = innerCurr;
+		indices[i * 6 + 2] = outerNext;
+
+		// 三角形2
+		indices[i * 6 + 3] = outerNext;
+		indices[i * 6 + 4] = innerCurr;
+		indices[i * 6 + 5] = innerNext;
+	}
+
+	instance->textureHandle_ = textureHandle;
+	instance->InitializeFromVertices(vertices, indices);
+
+	return instance;
+
+}
+
 void Model2::PreDraw(ID3D12GraphicsCommandList* commandList) { ModelCommon2::GetInstance()->PreDraw(commandList); }
 
 void Model2::PostDraw() { ModelCommon2::GetInstance()->PostDraw(); }
