@@ -186,11 +186,10 @@ Model2* Model2::CreateRing(uint32_t textureHandle) {
 	std::vector<uint32_t> indices;
 
 	const uint32_t kRingDivide = 32;
-	const float kOuterRadius = 1.0f;
-	const float kInnerRadius = 0.2f;
+	const float kOuterRadius = 5.0f;
+	const float kInnerRadius = 1.0f;
 	const float radianPerDivide = 2.0f * std::numbers::pi_v<float> / float(kRingDivide);
 
-	// 頂点数は (kRingDivide + 1) * 2
 	vertices.resize((kRingDivide + 1) * 2);
 	indices.resize(kRingDivide * 6);
 
