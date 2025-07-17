@@ -202,12 +202,12 @@ Model2* Model2::CreateRing(uint32_t textureHandle) {
 		// 外周頂点
 		vertices[i * 2].pos = {-sinVal * kOuterRadius, cosVal * kOuterRadius, 0.0f};
 		vertices[i * 2].uv = {u, 0.0f};
-		vertices[i * 2].normal = {0.0f, 0.0f, 1.0f};
+		vertices[i * 2].normal = {0.0f, 0.0f, -1.0f};
 
 		// 内周頂点
 		vertices[i * 2 + 1].pos = {-sinVal * kInnerRadius, cosVal * kInnerRadius, 0.0f};
 		vertices[i * 2 + 1].uv = {u, 1.0f};
-		vertices[i * 2 + 1].normal = {0.0f, 0.0f, 1.0f};
+		vertices[i * 2 + 1].normal = {0.0f, 0.0f, -1.0f};
 	}
 
 	for (uint32_t i = 0; i < kRingDivide; ++i) {
