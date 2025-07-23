@@ -29,6 +29,14 @@ void TitleScene::Update() {
 	
 	}
 
+	const float kBlinkCycle = 0.5f; // 秒（0.5秒ごとに切り替え）
+	timer_ += 1.0f / 60.0f;    // 毎フレーム約1/60秒進める（仮に60FPS）
+
+	if (timer_ >= kBlinkCycle) {
+		timer_ = 0.0f;
+		isBlinkVisible_ = !isBlinkVisible_; // ON/OFFを切り替える
+	}
+
 }
 
 void TitleScene::Draw() {
@@ -39,7 +47,10 @@ void TitleScene::Draw() {
 
 	Sprite::PreDraw(commandList);
 	spriteBG_->Draw();
-	sprite_->Draw();
+	//sprite_->Draw();
+	if (isBlinkVisible_) {
+		sprite_->Draw(); // 点滅するスプライト
+	}
 	Sprite::PostDraw();
 
 }

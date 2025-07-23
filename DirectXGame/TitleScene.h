@@ -29,4 +29,7 @@ private:
 
 	bool isFinished_ = false;
 
+	float timer_ = 0;
+	bool isBlinkVisible_ = true;
+
 };
