@@ -31,7 +31,7 @@ void GameScene::Draw() {
 	// 3Dモデル描画前処理
 	Model::PreDraw(dxCommon->GetCommandList());
 
-	particle_->Draw(camera_);
+	//particle_->Draw(camera_);
 
 	// 3Dモデル描画後処理
 	Model::PostDraw();
