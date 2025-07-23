@@ -20,6 +20,8 @@ public:
 	// 描画
 	void Draw();
 
+	bool IsFinished() const { return isFinished_; }
+
 private:
 	// モデルデータ
 	Model* modelParticle_ = nullptr;
@@ -29,4 +31,7 @@ private:
 
 	// パーティクル
 	Particle* particle_ = nullptr;
+
+	Input* input_ = nullptr;
+	bool isFinished_ = false;
 };

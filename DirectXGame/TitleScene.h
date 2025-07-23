@@ -24,6 +24,9 @@ private:
 	uint32_t textureHandle_ = 0;
 	Sprite* sprite_ = nullptr;
 
+	uint32_t textureHandleBG_ = 0;
+	Sprite* spriteBG_ = nullptr;
+
 	bool isFinished_ = false;
 
 };
