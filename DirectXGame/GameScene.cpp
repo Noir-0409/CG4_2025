@@ -4,6 +4,8 @@ GameScene::~GameScene() {
 
 	delete modelParticle_;
 	delete particle_;
+	delete stage_;
+
 }
 
 void GameScene::Initialize() {

@@ -21,5 +21,9 @@ uint32_t textureHandle_ = 0;
 Sprite* sprite1_ = nullptr;
 Sprite* sprite2_ = nullptr;
 
+float scrollSpeed_ = 0.0f;
+
+Vector2 pos1_ = {0.0f, 0.0f};
+Vector2 pos2_ = {0.0f, 0.0f};
 
 };
