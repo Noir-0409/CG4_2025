@@ -5,6 +5,8 @@ GameScene::~GameScene() {
 	delete modelParticle_;
 	delete particle_;
 	delete stage_;
+	delete modelPlayer_;
+	delete player_;
 
 }
 
@@ -43,31 +45,12 @@ void GameScene::Update() {
 		isFinished_ = true;
 	}
 
+	player_->Update();
+
 	stage_->Update();
 }
 
 void GameScene::Draw() {
-
-	//// DirectXCommonインスタンスの所得
-	//DirectXCommon* dxCommon = DirectXCommon::GetInstance();
-
-	//// 3Dモデル描画前処理
-	//Model::PreDraw(dxCommon->GetCommandList());
-
-	//
-	//player_->Draw(camera_);
-
-	//// 3Dモデル描画後処理
-	//Model::PostDraw();
-
-	//// コマンドリストの取得
-	//ID3D12GraphicsCommandList* commandList = dxCommon->GetCommandList();
-
-	//Sprite::PreDraw(commandList);
-
-	//stage_->Draw();
-
-	//Sprite::PostDraw();
 
 	DirectXCommon* dxCommon = DirectXCommon::GetInstance();
 
