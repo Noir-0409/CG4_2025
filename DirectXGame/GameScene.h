@@ -3,6 +3,7 @@
 #include "KamataEngine.h"
 #include "Particle.h"
 #include "Stage.h"
+#include "Player.h"
 
 using namespace KamataEngine;
 
@@ -37,4 +38,9 @@ private:
 
 	Input* input_ = nullptr;
 	bool isFinished_ = false;
+
+	Model* modelPlayer_ = nullptr;
+
+	Player* player_ = nullptr;
+
 };
