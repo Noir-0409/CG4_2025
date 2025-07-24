@@ -20,6 +20,10 @@ void GameScene::Initialize() {
 	// パーティクルの初期化
 	particle_->Initialize(modelParticle_);
 
+	stage_ = new Stage();
+
+	stage_->Initialize();
+
 	input_ = Input::GetInstance();
 }
 
@@ -30,6 +34,8 @@ void GameScene::Update() {
 
 		isFinished_ = true;
 	}
+
+	stage_->Update();
 }
 
 void GameScene::Draw() {
@@ -44,4 +50,13 @@ void GameScene::Draw() {
 
 	// 3Dモデル描画後処理
 	Model::PostDraw();
+
+	// コマンドリストの取得
+	ID3D12GraphicsCommandList* commandList = dxCommon->GetCommandList();
+
+	Sprite::PreDraw(commandList);
+
+	stage_->Draw();
+
+	Sprite::PostDraw();
 }

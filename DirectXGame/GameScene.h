@@ -2,6 +2,7 @@
 #include "3d/Model.h"
 #include "KamataEngine.h"
 #include "Particle.h"
+#include "Stage.h"
 
 using namespace KamataEngine;
 
@@ -31,6 +32,8 @@ private:
 
 	// パーティクル
 	Particle* particle_ = nullptr;
+
+	Stage* stage_ = nullptr;
 
 	Input* input_ = nullptr;
 	bool isFinished_ = false;
