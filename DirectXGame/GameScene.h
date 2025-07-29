@@ -2,11 +2,26 @@
 #include "3d/Model.h"
 #include "KamataEngine.h"
 #include "Particle.h"
+#include <map>
+#include <vector>
 
 using namespace KamataEngine;
 
 // ゲームシーン
 class GameScene {
+
+	struct LevelData {
+
+		struct ObjectData {
+
+			std::string fileName;
+			Vector3 translation;
+			Vector3 rotation;
+			Vector3 scaling;
+		};
+
+		std::vector<ObjectData> objects;
+	};
 
 public:
 	~GameScene();
@@ -21,12 +36,12 @@ public:
 	void Draw();
 
 private:
-	// モデルデータ
-	Model* modelParticle_ = nullptr;
+	LevelData* levelData = nullptr;
 
-	// カメラ
-	Camera camera_;
+	std::map<std::string, Model*> models;
 
-	// パーティクル
-	Particle* particle_ = nullptr;
+	std::vector<WorldTransform*> objects;
+
+	Camera camera;
+
 };
