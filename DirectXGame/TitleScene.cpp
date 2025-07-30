@@ -6,7 +6,7 @@ TitleScene::~TitleScene() {
 
 	delete sprite_;
 	delete spriteBG_;
-
+	delete spaceSprite_;
 }
 
 void TitleScene::Initialize() {
@@ -16,12 +16,13 @@ void TitleScene::Initialize() {
 	isFinished_ = false;
 
 	spritePos_ = {0, -300};
-	
+
 	textureHandle_ = TextureManager::Load("title.png");
 	textureHandleBG_ = TextureManager::Load("titleBG.png");
+	spaceTextureHandle_ = TextureManager::Load("space.png");
 	sprite_ = Sprite::Create(textureHandle_, spritePos_);
 	spriteBG_ = Sprite::Create(textureHandleBG_, {0, 0});
-
+	spaceSprite_ = Sprite::Create(spaceTextureHandle_, {540, 600});
 }
 
 void TitleScene::Update() {
@@ -30,7 +31,7 @@ void TitleScene::Update() {
 		isFinished_ = true;
 	}
 
-	const float kTargetY = 200.0f;
+	const float kTargetY = 80.0f;
 	const float kMoveSpeed = 2.0f;
 
 	if (spritePos_.y < kTargetY) {
@@ -40,8 +41,15 @@ void TitleScene::Update() {
 		}
 		sprite_->SetPosition(spritePos_);
 	}
-}
 
+	const float kBlinkCycle = 0.5f;
+	timer_ += 1.0f / 60.0f;
+
+	if (timer_ >= kBlinkCycle) {
+		timer_ = 0.0f;
+		isBlinkVisible_ = !isBlinkVisible_;
+	}
+}
 
 void TitleScene::Draw() {
 
@@ -54,6 +62,9 @@ void TitleScene::Draw() {
 	spriteBG_->Draw();
 	sprite_->Draw();
 
-	Sprite::PostDraw();
+	if (isBlinkVisible_) {
+		spaceSprite_->Draw();
+	}
 
+	Sprite::PostDraw();
 }
