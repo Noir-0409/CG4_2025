@@ -14,9 +14,12 @@ void TitleScene::Initialize() {
 	input_ = Input::GetInstance();
 
 	isFinished_ = false;
+
+	spritePos_ = {0, -300};
+	
 	textureHandle_ = TextureManager::Load("title.png");
 	textureHandleBG_ = TextureManager::Load("titleBG.png");
-	sprite_ = Sprite::Create(textureHandle_, {0, 0});
+	sprite_ = Sprite::Create(textureHandle_, spritePos_);
 	spriteBG_ = Sprite::Create(textureHandleBG_, {0, 0});
 
 }
@@ -24,20 +27,21 @@ void TitleScene::Initialize() {
 void TitleScene::Update() {
 
 	if (input_->TriggerKey(DIK_SPACE)) {
-	
-	isFinished_ = true;
-	
+		isFinished_ = true;
 	}
 
-	const float kBlinkCycle = 0.5f; // 秒（0.5秒ごとに切り替え）
-	timer_ += 1.0f / 60.0f;    // 毎フレーム約1/60秒進める（仮に60FPS）
+	const float kTargetY = 200.0f;
+	const float kMoveSpeed = 2.0f;
 
-	if (timer_ >= kBlinkCycle) {
-		timer_ = 0.0f;
-		isBlinkVisible_ = !isBlinkVisible_; // ON/OFFを切り替える
+	if (spritePos_.y < kTargetY) {
+		spritePos_.y += kMoveSpeed;
+		if (spritePos_.y > kTargetY) {
+			spritePos_.y = kTargetY;
+		}
+		sprite_->SetPosition(spritePos_);
 	}
-
 }
+
 
 void TitleScene::Draw() {
 
@@ -46,11 +50,10 @@ void TitleScene::Draw() {
 	ID3D12GraphicsCommandList* commandList = dxCommon_->GetCommandList();
 
 	Sprite::PreDraw(commandList);
+
 	spriteBG_->Draw();
-	//sprite_->Draw();
-	if (isBlinkVisible_) {
-		sprite_->Draw(); // 点滅するスプライト
-	}
+	sprite_->Draw();
+
 	Sprite::PostDraw();
 
 }

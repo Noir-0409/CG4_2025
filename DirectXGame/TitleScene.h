@@ -32,4 +32,6 @@ private:
 	float timer_ = 0;
 	bool isBlinkVisible_ = true;
 
+	Vector2 spritePos_ = {0, -100};
+
 };
