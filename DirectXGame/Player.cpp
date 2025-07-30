@@ -12,6 +12,9 @@ void Player::Initialize(Model* model) {
 
 	worldTransform_.Initialize();
 
+	 worldTransform_.scale_ = {3.0f, 3.0f, 3.0f};
+	worldTransform_.rotation_.y = 3.14159f / 2.0f;
+
 	input_ = Input::GetInstance();
 }
 
