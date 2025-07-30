@@ -7,6 +7,7 @@ GameScene::~GameScene() {
 	delete stage_;
 	delete modelPlayer_;
 	delete player_;
+	delete graph_;
 
 }
 
@@ -34,6 +35,10 @@ void GameScene::Initialize() {
 
 	stage_->Initialize();
 
+	graph_ = new Graph();
+
+	graph_->Initialize();
+
 	input_ = Input::GetInstance();
 }
 
@@ -48,6 +53,9 @@ void GameScene::Update() {
 	player_->Update();
 
 	stage_->Update();
+
+	graph_->Update();
+
 }
 
 void GameScene::Draw() {
@@ -69,6 +77,8 @@ void GameScene::Draw() {
 	Model::PostDraw();
 
 	Sprite::PreDraw(dxCommon->GetCommandList());
+
+	graph_->Draw();
 
 	Sprite::PostDraw();
 
