@@ -14,4 +14,7 @@ public:
 
 private:
 	Sprite* sprite_[5] = {};
+
+	Vector2 size = {32.0f, 64.0f};
+
 };
