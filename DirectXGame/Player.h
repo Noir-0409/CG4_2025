@@ -21,4 +21,6 @@ private:
 
 	Model* model_ = nullptr;
 
+	 Input* input_ = nullptr; 
+
 };
