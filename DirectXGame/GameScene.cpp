@@ -67,7 +67,7 @@ void GameScene::Initialize() {
 		
 		}
 	
-		if (object.contains("children"));
+		//if (object.contains("children"));
 
 
 	}
@@ -77,7 +77,8 @@ void GameScene::Initialize() {
 		Model* model = nullptr;
 		decltype(models)::iterator it = models.find(objectData.fileName);
 		if (it != models.end()) {
-			model = it->second;
+			Model* model = Model::CreateFromOBJ(objectData.fileName);
+			models[objectData.fileName] = model;
 		}
 
 		WorldTransform* newObject = new WorldTransform();
@@ -87,7 +88,7 @@ void GameScene::Initialize() {
 
 		newObject->Initialize();
 
-		objects.push_back(newObject);
+		worldTransforms.push_back(newObject);
 
 	}
 
@@ -97,7 +98,7 @@ void GameScene::Initialize() {
 
 void GameScene::Update() { 
 
-	for (WorldTransform* object : objects) {
+	for (WorldTransform* object : worldTransforms) {
 	
 		object->TransferMatrix();
 	
@@ -123,7 +124,9 @@ void GameScene::Draw() {
 			model = it->second;
 		}
 
-		model->Draw(*objects[i], camera);
+		if (model) {
+			model->Draw(*worldTransforms[i], camera);
+		}
 
 		i++;
 

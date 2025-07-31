@@ -40,7 +40,7 @@ private:
 
 	std::map<std::string, Model*> models;
 
-	std::vector<WorldTransform*> objects;
+	std::vector<WorldTransform*> worldTransforms;
 
 	Camera camera;
 
