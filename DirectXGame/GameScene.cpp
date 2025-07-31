@@ -8,6 +8,7 @@ GameScene::~GameScene() {
 	delete modelPlayer_;
 	delete player_;
 	delete graph_;
+	delete number_;
 
 }
 
@@ -39,6 +40,10 @@ void GameScene::Initialize() {
 
 	graph_->Initialize();
 
+	number_ = new Number();
+
+	number_->Initialize();
+
 	input_ = Input::GetInstance();
 }
 
@@ -55,6 +60,8 @@ void GameScene::Update() {
 	stage_->Update();
 
 	graph_->Update();
+
+	number_->Update();
 
 }
 
@@ -79,6 +86,8 @@ void GameScene::Draw() {
 	Sprite::PreDraw(dxCommon->GetCommandList());
 
 	graph_->Draw();
+
+	number_->Draw();
 
 	Sprite::PostDraw();
 

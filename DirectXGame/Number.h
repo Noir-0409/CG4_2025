@@ -6,7 +6,7 @@ using namespace KamataEngine;
 class Number {
 
 public:
-	void Initilaize();
+	void Initialize();
 
 	void Update();
 
